@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'status_publisher = warehouse_bot.status_publisher:main' # Telling ros2 about the subscriber
+            'status_publisher = warehouse_bot.status_publisher:main', # Telling ros2 about the subscriber
+            'battery_monitor = warehouse_bot.battery_monitor:main'
         ],
     },
 )
