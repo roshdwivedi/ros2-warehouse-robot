@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'status_publisher = warehouse_bot.status_publisher:main' # Telling ros2 about the subscriber
         ],
     },
 )
