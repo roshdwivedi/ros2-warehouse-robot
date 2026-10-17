@@ -24,5 +24,7 @@ if(BUILD_TESTING)
 endif()
 install(DIRECTORY urdf launch rviz config
   DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY urdf launch rviz config worlds
+  DESTINATION share/${PROJECT_NAME})
 
 ament_package()

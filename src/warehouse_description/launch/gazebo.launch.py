@@ -13,13 +13,15 @@ def generate_launch_description():
     pkg_share = get_package_share_directory('warehouse_description')
     xacro_file = os.path.join(pkg_share, 'urdf', 'warehouse_amr.urdf.xacro')
     bridge_config = os.path.join(pkg_share, 'config', 'bridge.yaml')
+    world_file = os.path.join(pkg_share, 'worlds', 'warehouse.sdf')
     robot_description = ParameterValue(Command(['xacro ', xacro_file]), value_type=str)
+    rviz_config = os.path.join(pkg_share, 'rviz', 'gazebo.rviz')
 
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(
             get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py'
         )),
-        launch_arguments={'gz_args': '-r empty.sdf'}.items(),
+        launch_arguments={'gz_args': f'-r {world_file}'}.items(),
     )
 
     return LaunchDescription([
@@ -38,5 +40,11 @@ def generate_launch_description():
             package='ros_gz_bridge',
             executable='parameter_bridge',
             parameters=[{'config_file': bridge_config, 'use_sim_time': True}]
-        )
+        ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            parameters=[{'use_sim_time': True}],
+            arguments=['-d', rviz_config]
+        ),
     ])
