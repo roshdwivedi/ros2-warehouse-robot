@@ -12,6 +12,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 def generate_launch_description():
     pkg_share = get_package_share_directory('warehouse_description')
     xacro_file = os.path.join(pkg_share, 'urdf', 'warehouse_amr.urdf.xacro')
+    bridge_config = os.path.join(pkg_share, 'config', 'bridge.yaml')
     robot_description = ParameterValue(Command(['xacro ', xacro_file]), value_type=str)
 
     gz_sim = IncludeLaunchDescription(
@@ -25,7 +26,7 @@ def generate_launch_description():
         gz_sim,
         Node(package='robot_state_publisher',
              executable='robot_state_publisher',
-             parameters=[{'robot_description': robot_description}],
+             parameters=[{'robot_description': robot_description, 'use_sim_time': True}],
         ),
         Node(
             package='ros_gz_sim',
@@ -33,4 +34,9 @@ def generate_launch_description():
             arguments=['-topic', 'robot_description', '-name', 'warehouse_amr', '-z', '0.01'],
             output='screen',
         ),
+        Node(
+            package='ros_gz_bridge',
+            executable='parameter_bridge',
+            parameters=[{'config_file': bridge_config, 'use_sim_time': True}]
+        )
     ])
