@@ -18,6 +18,7 @@
   <material name="orange"><color rgba="1.0 0.5 0.1 1.0"/></material>
   <material name="black"><color rgba="0.1 0.1 0.1 1.0"/></material>
   <material name="grey"><color rgba="0.6 0.6 0.6 1.0"/></material>
+  <material name="red"><color rgba="1.0 0.0 0.0 1.0"/></material>
 
   <xacro:macro name="box_inertia" params="m x y z xyz rpy">
     <inertial>
@@ -92,7 +93,7 @@
         <cylinder radius="${wheel_radius}" length="${wheel_width}"/>  
       </geometry>
     </collision>
-    <!-- left_wheel AND right_wheel (identical) -->
+    <!-- left_wheel-->
     <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" h="${wheel_width}"
                             xyz="0 0 0" rpy="${pi/2} 0 0"/>
   </link>
@@ -119,7 +120,7 @@
         <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
       </geometry>
     </collision>
-    <!-- left_wheel AND right_wheel (identical) -->
+    <!--right_wheel-->
     <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" h="${wheel_width}"
                             xyz="0 0 0" rpy="${pi/2} 0 0"/>
   </link>
@@ -182,7 +183,7 @@
       <geometry>
         <cylinder radius="${lidar_radius}" length="${lidar_length}"/>
       </geometry>
-      <material name="red" rgba="1.0 0.0 0.0 1.0"/>
+      <material name="red"/>
     </visual>
     <collision>
       <geometry>

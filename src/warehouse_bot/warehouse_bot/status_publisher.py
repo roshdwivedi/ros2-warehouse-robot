@@ -1,6 +1,6 @@
 import rclpy
-from rclpy.node import Node
 from rclpy.executors import ExternalShutdownException
+from rclpy.node import Node
 from std_msgs.msg import String
 
 
@@ -15,11 +15,10 @@ class StatusPublisher(Node):
     def publish_status(self):
         msg = String()
         if (self.battery <= 20):
-            msg.data  = f'Battery: {self.battery}% - LOW BATTERY, return to charger'
+            msg.data = f'Battery: {self.battery}% - LOW BATTERY, return to charger'
             self.get_logger().warning(msg.data)
-            
         else:
-            msg.data  = f'Battery: {self.battery}%'
+            msg.data = f'Battery: {self.battery}%'
             self.get_logger().info(msg.data)
 
         self.publisher.publish(msg)
@@ -27,9 +26,8 @@ class StatusPublisher(Node):
         self.battery -= 1
         if (self.battery <= 0):
             self.battery = 100
-            msg.data  = f'Charging Complete, Battery % -> {self.battery}'
+            msg.data = f'Charging Complete, Battery % -> {self.battery}'
             self.get_logger().info(msg.data)
-
 
 
 def main():

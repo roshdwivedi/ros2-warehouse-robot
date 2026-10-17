@@ -1,7 +1,8 @@
 import rclpy
-from rclpy.node import Node
 from rclpy.executors import ExternalShutdownException
+from rclpy.node import Node
 from std_msgs.msg import String
+
 
 class BatteryMonitor(Node):
     def __init__(self):
@@ -16,8 +17,8 @@ class BatteryMonitor(Node):
 
         if is_low and not self.battery_low:
             self.get_logger().warning(f'Robot needs charging: {msg.data}')
-        elif not is_low and self.battery_low :
-             self.get_logger().info(f'Battery OK again: {msg.data}')
+        elif not is_low and self.battery_low:
+            self.get_logger().info(f'Battery OK again: {msg.data}')
         self.battery_low = is_low
 
 

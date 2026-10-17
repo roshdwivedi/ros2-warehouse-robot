@@ -15,7 +15,8 @@ setup(
     zip_safe=True,
     maintainer='rosh',
     maintainer_email='roshandwivedi99@gmail.com',
-    description='A simulated warehouse robot: driving, obstacle stops, mapping, navigation and pick tasks with ROS2.',
+    description='A simulated warehouse robot: driving, obstacle stops, '
+                'mapping, navigation and pick tasks with ROS2.',
     license='Apache-2.0',
     extras_require={
         'test': [
@@ -24,7 +25,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'status_publisher = warehouse_bot.status_publisher:main', # Telling ros2 about the subscriber
+            'status_publisher = warehouse_bot.status_publisher:main',
             'battery_monitor = warehouse_bot.battery_monitor:main'
         ],
     },

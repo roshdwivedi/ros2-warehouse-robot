@@ -3,7 +3,7 @@
 <package format="3">
   <name>warehouse_description</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Robot model (URDF/xacro) and launch files for the warehouse AMR: RViz display and Gazebo spawn.</description>
   <maintainer email="roshandwivedi99@gmail.com">rosh</maintainer>
   <license>Apache-2.0</license>
 
