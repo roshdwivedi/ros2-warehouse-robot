@@ -3,8 +3,8 @@ A simulated warehouse robot built with ROS2 Jazzy and Gazebo. It will drive to g
 ## Progress
 - [x] Workspace and package setup
 - [x] Battery status publisher
-- [ ] Battery monitor (subscriber)
-- [ ] Robot in Gazebo
+- [x] Battery monitor (subscriber)
+- [x] Robot in Gazebo
 - [ ] Go-to-goal controller
 - [ ] Obstacle stop
 - [ ] Parameters
