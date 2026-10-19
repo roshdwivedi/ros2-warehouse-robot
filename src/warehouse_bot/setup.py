@@ -26,7 +26,8 @@ setup(
     entry_points={
         'console_scripts': [
             'status_publisher = warehouse_bot.status_publisher:main',
-            'battery_monitor = warehouse_bot.battery_monitor:main'
+            'battery_monitor = warehouse_bot.battery_monitor:main',
+            'go_to_goal = warehouse_bot.go_to_goal:main',
         ],
     },
 )
