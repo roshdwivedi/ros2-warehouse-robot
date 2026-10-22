@@ -6,6 +6,7 @@ from warehouse_bot.geometry import (
     distance_and_angle_to_goal,
     normalize_angle,
     yaw_from_quaternion,
+    clamp,
 )
 
 
@@ -60,3 +61,16 @@ def test_yaw_facing_forward():
 def test_yaw_facing_right():
     x, y, z, w = quaternion_from_yaw(math.radians(-90))
     assert yaw_from_quaternion(x, y, z, w) == pytest.approx(math.radians(-90))
+
+
+def test_clamp_caps_positive():
+    assert clamp(4.7, 1.0) == pytest.approx(1.0)
+
+
+def test_clamp_caps_negetive():
+    assert clamp(-4.7, 1.0) == pytest.approx(-1.0)
+
+    
+def test_clamp_caps_unchanged():
+    assert clamp(0.3, 1.0) == pytest.approx(0.3)
+    

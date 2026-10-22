@@ -16,3 +16,8 @@ def distance_and_angle_to_goal(x, y, gx, gy):
 def yaw_from_quaternion(x, y, z, w):
     """Return the yaw of a quaternion, in radians."""
     return math.atan2(2 * (w * z + x * y), 1 - 2 * (y * y + z * z))
+
+
+def clamp(value, limit):
+    """Return value limited to the range [-limit, limit]."""
+    return max(-limit, min(value, limit))

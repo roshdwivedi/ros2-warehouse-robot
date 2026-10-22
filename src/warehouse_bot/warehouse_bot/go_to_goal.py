@@ -8,18 +8,24 @@ from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 
 from warehouse_bot.geometry import (
+    clamp,
     distance_and_angle_to_goal,
     normalize_angle,
     yaw_from_quaternion,
 )
 
 
+K_ANGULAR = 1.5
+MAX_ANGULAR = 1.0
+ANGLE_TOLERANCE = math.radians(3.0)
+
+
 class GoToGoal(Node):
 
     def __init__(self):
         super().__init__('go_to_goal')
-        self.goal_x = 2.0
-        self.goal_y = 0.0
+        self.goal_x = 0.0
+        self.goal_y = 2.0
         # Robot pose: None until the first odom message arrives
         self.x = None
         self.y = None
@@ -43,6 +49,11 @@ class GoToGoal(Node):
         self.get_logger().info(
             f'distance {distance:.2f} m, heading error {math.degrees(heading_error):.1f} deg'
         )
+        
+        cmd = Twist()
+        if abs(heading_error) > ANGLE_TOLERANCE:
+            cmd.angular.z = clamp(K_ANGULAR * heading_error, MAX_ANGULAR)
+        self.cmd_pub.publish(cmd)
 
 
 def main():
